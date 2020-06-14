@@ -20,8 +20,12 @@ const handleHomepage = (req, res) => {
 // profile page
 const handleProfilePage = (req, res) => {
   let id = req.params._id;
-  console.log(id);
-  res.send(id);
+  const user = users.find((item) => id === item._id);
+  if (user) {
+    res.status(200).render("pages/profile", {
+      user: user,
+    });
+  }
 };
 
 // -----------------------------------------------------
