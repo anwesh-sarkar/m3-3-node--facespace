@@ -19,7 +19,7 @@ const handleHomepage = (req, res) => {
 
 // profile page
 const handleProfilePage = (req, res) => {
-  let id = req.params.id;
+  let id = req.params._id;
   console.log(id);
   res.send(id);
 };
@@ -36,7 +36,7 @@ express()
   .get("/", handleHomepage)
 
   // profile page endpoint
-  .get("/users/:id", handleProfilePage)
+  .get("/users/:_id", handleProfilePage)
 
   // a catchall endpoint that will send the 404 message.
   .get("*", handleFourOhFour)
