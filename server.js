@@ -39,7 +39,7 @@ const handleProfilePage = (req, res) => {
 
 // signin page
 const handleSignin = (req, res) => {
-  res.status(200).send("ok");
+  res.status(200).render("pages/signin");
 };
 
 // -----------------------------------------------------
