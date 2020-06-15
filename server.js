@@ -21,9 +21,18 @@ const handleHomepage = (req, res) => {
 const handleProfilePage = (req, res) => {
   let id = req.params._id;
   const user = users.find((item) => id === item._id);
+
+  // Create an array containing objects, where each object is a friend of the user and has properties
+  const friends = user.friends.map((id) => {
+    return users.find((item) => id === item._id);
+  });
+
+  console.log(friends);
+
   if (user) {
     res.status(200).render("pages/profile", {
       user: user,
+      friends: friends,
     });
   }
 };
