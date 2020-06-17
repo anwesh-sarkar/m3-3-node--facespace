@@ -27,8 +27,6 @@ const handleProfilePage = (req, res) => {
     return users.find((item) => id === item._id);
   });
 
-  console.log(friends);
-
   if (user) {
     res.status(200).render("pages/profile", {
       user: user,
@@ -40,6 +38,18 @@ const handleProfilePage = (req, res) => {
 // signin page
 const handleSignin = (req, res) => {
   res.status(200).render("pages/signin");
+};
+
+// Get name from form in sign-in page
+const handleName = (req, res) => {
+  let firstName = req.query.firstName;
+  let user = users.find((user) => user.name == firstName);
+
+  if (user) {
+    res.status(200).redirect(`users/${user._id}`);
+  } else {
+    res.status(404).redirect("/signin");
+  }
 };
 
 // -----------------------------------------------------
@@ -58,6 +68,9 @@ express()
 
   // Sign-in endpoint
   .get("/signin", handleSignin)
+
+  // endpoint to receive data from sign-in form
+  .get("/getname", handleName)
 
   // a catchall endpoint that will send the 404 message.
   .get("*", handleFourOhFour)
